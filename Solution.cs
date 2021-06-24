@@ -7,23 +7,23 @@ namespace CodilityChallenges
     class Solution
     {
         public static int solution(int[] A)
-        {
+{
             int count = 0;
             for (int index = 0; index < A.Length; index++)
             {
                 for (int indexToCompare = 0; indexToCompare < A.Length; indexToCompare++)
                 {
-                    if (index >= indexToCompare)
+                    if (index < indexToCompare)
                     {
-                        continue;
+                        long distanceBetweenIndexes = Math.Abs(index - indexToCompare);
+                        long indexCircleRadius = A[index];
+                        long indexToCompareCircleRadius = A[indexToCompare];
+                        if (distanceBetweenIndexes <= (indexCircleRadius + indexToCompareCircleRadius))
+                        {
+                            count++;
+                        }
                     }
-                    long distanceBetweenIndexes = Math.Abs(index - indexToCompare);
-                    long indexCircleRadius = A[index];
-                    long indexToCompareCircleRadius = A[indexToCompare];
-                    if (distanceBetweenIndexes <= (indexCircleRadius + indexToCompareCircleRadius))
-                    {
-                        count++;
-                    }
+
                 }
             }
             return count <= 10000000 ? count : -1;
