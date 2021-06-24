@@ -6,8 +6,9 @@ namespace CodilityChallenges
 
     class Solution
     {
+        
         public static int solution(int[] A)
-{
+        {
             int count = 0;
             for (int index = 0; index < A.Length; index++)
             {
@@ -15,10 +16,7 @@ namespace CodilityChallenges
                 {
                     if (index < indexToCompare)
                     {
-                        long distanceBetweenIndexes = Math.Abs(index - indexToCompare);
-                        long indexCircleRadius = A[index];
-                        long indexToCompareCircleRadius = A[indexToCompare];
-                        if (distanceBetweenIndexes <= (indexCircleRadius + indexToCompareCircleRadius))
+                        if (Math.Abs(index - indexToCompare) <= (long)(A[index] + A[indexToCompare]))
                         {
                             count++;
                         }
