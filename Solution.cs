@@ -3,13 +3,12 @@
 namespace CodilityChallenges
 {
     using System;
-    using System.Collections.Generic;
 
     class Solution
     {
         public static int solution(int[] A)
         {
-            HashSet<string> intersectingCirclesSet = new HashSet<string>();
+            int count = 0;
             for (int index = 0; index < A.Length; index++)
             {
                 for (int indexToCompare = 0; indexToCompare < A.Length; indexToCompare++)
@@ -23,11 +22,11 @@ namespace CodilityChallenges
                     long indexToCompareCircleRadius = A[indexToCompare];
                     if (distanceBetweenIndexes <= (indexCircleRadius + indexToCompareCircleRadius))
                     {
-                        intersectingCirclesSet.Add(index + "-" + indexToCompare);
+                        count++;
                     }
                 }
             }
-            return intersectingCirclesSet.Count <= 10000000 ? intersectingCirclesSet.Count : -1;
+            return count <= 10000000 ? count : -1;
         }
 
         public static void Main(string[] args)
