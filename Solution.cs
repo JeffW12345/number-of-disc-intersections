@@ -9,51 +9,32 @@ namespace CodilityChallenges
     {
         public static int solution(int[] A)
         {
-            Dictionary<long, List<int>> xAxisToCirclesDict = new Dictionary<long, List<int>>();
+            HashSet<string> intersectingCirclesSet = new HashSet<string>();
             for (int index = 0; index < A.Length; index++)
             {
-                // Find the first and last values included in this element's circle. 
-                long minVal = index - A[index];
-                long maxVal = index + A[index];
-                // Populate a dictionary with the numbers covered by the circles as keys and the relevant indexes as values
-                for (long covered = minVal; covered < maxVal + 1; covered++)
+                for (int indexToCompare = 0; indexToCompare < A.Length; indexToCompare++)
                 {
-                    if (xAxisToCirclesDict.ContainsKey(covered))
+                    if (index >= indexToCompare)
                     {
-                        xAxisToCirclesDict[covered].Add(index);
+                        continue;
                     }
-                    else
+                    long distanceBetweenIndexes = Math.Abs(index - indexToCompare);
+                    long indexCircleRadius = A[index];
+                    long indexToCompareCircleRadius = A[indexToCompare];
+                    if (distanceBetweenIndexes <= (indexCircleRadius + indexToCompareCircleRadius))
                     {
-                        xAxisToCirclesDict.Add(covered, new List<int> { index });
+                        intersectingCirclesSet.Add(index + "-" + indexToCompare);
                     }
                 }
             }
-
-            // Populates a set of strings with 'high index-low index' strings, e.g. '2-1'.
-            HashSet<string> set = new HashSet<string>();
-            foreach (var entry in xAxisToCirclesDict)
-            {
-                if (entry.Value.Count > 1)
-                {
-                    for (int i = 0; i < entry.Value.Count; i++)
-                    {
-                        for (int j = 0; j < entry.Value.Count; j++)
-                        {
-                            if (entry.Value[i] > entry.Value[j])
-                            {
-                                set.Add(entry.Value[i] + "-" + entry.Value[j]);
-                            }
-                        }
-                    }
-                }
-            }
-            return set.Count <= 10000000 ? set.Count : -1;
+            return intersectingCirclesSet.Count <= 10000000 ? intersectingCirclesSet.Count : -1;
         }
 
         public static void Main(string[] args)
         {
-            int[] A = { 1, 5, 2, 1, 4, 0 }; // Expected value 11
+            int[] A = { 1, 1, 1 }; // Expected value 3
             Console.WriteLine(solution(A));
         }
     }
 }
+
