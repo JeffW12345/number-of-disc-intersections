@@ -29,7 +29,7 @@ namespace CodilityChallenges
                 }
             }
 
-            // Populates a set of strings with high index-low index'
+            // Populates a set of strings with 'high index-low index' strings, e.g. '2-1'.
             HashSet<string> set = new HashSet<string>();
             foreach (var entry in xAxisToCirclesDict)
             {
@@ -39,7 +39,7 @@ namespace CodilityChallenges
                     {
                         for (int j = 0; j < entry.Value.Count; j++)
                         {
-                            if (entry.Value[i] < entry.Value[j])
+                            if (entry.Value[i] > entry.Value[j])
                             {
                                 set.Add(entry.Value[i] + "-" + entry.Value[j]);
                             }
