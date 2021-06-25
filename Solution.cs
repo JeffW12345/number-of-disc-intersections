@@ -10,18 +10,16 @@ namespace CodilityChallenges
         public static int solution(int[] A)
         {
             int count = 0;
-            for (int index = 0; index < A.Length; index++)
+            // Compares the elements of 'A' against each other, without duplicate counting.
+            for (long index = 0; index < A.Length; index++)
             {
-                for (int indexToCompare = 0; indexToCompare < A.Length; indexToCompare++)
+                for (long indexToCompare = index + 1; indexToCompare < A.Length; indexToCompare++)
                 {
-                    if (index < indexToCompare)
+                    long radiusesCombined = (long) A[index] + (long) A[indexToCompare];
+                    if ((indexToCompare - index) <= radiusesCombined)
                     {
-                        if (Math.Abs(index - indexToCompare) <= (long)(A[index] + A[indexToCompare]))
-                        {
-                            count++;
-                        }
+                        count++;
                     }
-
                 }
             }
             return count <= 10000000 ? count : -1;
